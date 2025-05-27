@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luahan Hati</title>
+  <style>
+    /* ... sama macam sebelum ni ... */
+    body {
+      background: linear-gradient(to right, #ffe6f7, #e0f7ff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #444;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.8em;
+      color: #d94f9f;
+    }
+    p {
+      font-size: 1.3em;
+      line-height: 1.6;
+    }
+    .signature {
+      margin-top: 25px;
+      font-style: italic;
+      color: #999;
+    }
+    img {
+      max-width: 180px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin-top: 30px;
+      background-color: #d94f9f;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #b63e82;
+    }
+    #replySection {
+      margin-top: 20px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+    #replyInput {
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+    #thankYouMsg {
+      margin-top: 20px;
+      font-style: italic;
+      color: #4caf50;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="meow.jpg" alt="Kucing Chibi Comel" />
+    <h1>Hai, Nonaa Akane</h1>
+    <p>Saya dah lama simpan sesuatu yang saya tak pernah berani cakap secara terus terang...</p>
+    <p>Sebenarnya, saya dah lama suka awak. Dalam diam.</p>
+    <p>Awak mungkin tak perasan, tapi setiap kali saya nampak awak — saya senyum tanpa sedar.</p>
+    <p>Saya tak mengharapkan apa-apa… cuma nak awak tahu, perasaan ini ikhlas dan tulus dari hati.</p>
+    <p>Terima kasih sebab hadir dalam hidup saya, walaupun mungkin hanya sebagai kenangan yang indah.</p>
+    <div class="signature">— Dari seseorang yang menyayangi awak dalam diam</div>
+
+    <button id="replyBtn">Balas</button>
+
+    <div id="replySection">
+      <textarea id="replyInput" rows="4" placeholder="Tulis jawapan awak di sini..."></textarea>
+      <button id="sendBtn">Hantar</button>
+    </div>
+
+    <div id="thankYouMsg">Terima kasih atas jawapan awak!</div>
+  </div>
+
+  <script>
+    const replyBtn = document.getElementById('replyBtn');
+    const replySection = document.getElementById('replySection');
+    const sendBtn = document.getElementById('sendBtn');
+    const replyInput = document.getElementById('replyInput');
+    const thankYouMsg = document.getElementById('thankYouMsg');
+
+    // Ganti dengan nombor WhatsApp anda (kod negara tanpa +)
+    const phoneNumber = '60123456789'; 
+
+    replyBtn.addEventListener('click', () => {
+      replySection.style.display = 'flex';
+      replyBtn.style.display = 'none';
+      replyInput.focus();
+    });
+
+    sendBtn.addEventListener('click', () => {
+      const replyText = replyInput.value.trim();
+      if(replyText === '') {
+        alert('Sila tulis sesuatu dahulu!');
+        replyInput.focus();
+        return;
+      }
+
+      const encodedMsg = encodeURIComponent(replyText);
+      const waLink = `https://wa.me/${60136075370}?text=${encodedMsg}`;
+
+      // Buka WhatsApp di tab baru
+      window.open(waLink, '_blank');
+
+      replyInput.value = '';
+      replySection.style.display = 'none';
+      thankYouMsg.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
